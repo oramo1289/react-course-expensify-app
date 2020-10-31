@@ -74,7 +74,7 @@ const expensesReducer = ( state = expensesReducerDefaultState, action ) => {
           ]
 
         case 'REMOVE_EXPENSE':
-            return state.filter( ({ id }) => id !== action.id )
+            return state( ({ id }) => id !== action.id )
         
         case 'EDIT_EXPENSE':
             return state.map((expense) => {
@@ -143,7 +143,7 @@ const filtersReducer = ( state = filtersReducerDefaultState, action) => {
 
 const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
     
-    return expenses.filter( (expense) => {
+    return expenses( (expense) => {
         
         const startDateMatch =  typeof startDate !== 'number' || expense.createdAt >= startDate;
         // console.log(`startDate ${expense.createdAt} >= ${startDate}` , expense.createdAt >= startDate);
@@ -178,7 +178,7 @@ store.subscribe( () => {
     const state = store.getState();
 
     // console.log(state);
-   const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
+   const visibleExpenses = getVisibleExpenses(state.expenses, states);
     console.log(visibleExpenses);
 } );
 
@@ -244,3 +244,18 @@ const demoState = {
 //     ...user,
 //     age:25
 // });
+
+
+// const addExpense = ( { description = '', 
+//                        note = '', 
+//                        amount = 0, 
+//                        createdAt = 0 } = {} ) => 
+//                                 ({  type: 'ADD_EXPENSE',
+//                                     expense: {
+//                                         id: uuid(),
+//                                         description,
+//                                         note,
+//                                         amount,
+//                                         createdAt
+//                                     }
+//                                 });

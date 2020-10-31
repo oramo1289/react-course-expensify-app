@@ -6,7 +6,11 @@ const incrementCount = ({ incrementBy = 1 } = {}) => ({
     type: 'INCREMENT',
     incrementBy
 });
-//{} = {} es desctructuring of an object without name
+//{} = {} el primero es la destrucción del objeto payload que el argumento que 
+//se pasa por el action generator
+//el segundo es por default un objeto vacío
+//y todavía dentro del primero donde está la deconstrucción al valor 
+//de incremenBy o decrementBy se le da un valor por default de 1
 const decrementCount = ( { decrementBy = 1 } = {} ) => ({
     type: 'DECREMENT',
     decrementBy
